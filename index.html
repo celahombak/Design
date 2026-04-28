@@ -1,0 +1,1486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TM HR Portal — Design System</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=Sora:wght@600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   DESIGN SYSTEM PAGE CHROME
+============================================================ */
+:root{
+  /* ── Brand Tokens ── */
+  --navy:#0d1b4b; --navy2:#152060; --blue:#1a3ab5; --blue2:#2248cc;
+  --orange:#e8622a; --org2:#f97316;
+  --soft:#f0f4ff; --light:#e5eaf8; --bg:#f1f4f9;
+  --white:#fff; --gray:#6b7280; --gray2:#9ca3af;
+  --text:#1e293b; --green:#22c55e; --yellow:#fbbf24; --red:#ef4444;
+  --s1:0 1px 4px rgba(13,27,75,.07);
+  --s2:0 4px 20px rgba(13,27,75,.10);
+  --s3:0 8px 40px rgba(13,27,75,.18);
+  --r:14px; --r2:10px;
+  /* ── DS Page Variables ── */
+  --sidebar:260px;
+  --ds-bg:#f8f9fc;
+  --ds-border:#e2e8f0;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:'DM Sans',sans-serif;background:var(--ds-bg);color:var(--text);display:flex;min-height:100vh;}
+::-webkit-scrollbar{width:5px;height:5px;}
+::-webkit-scrollbar-track{background:transparent;}
+::-webkit-scrollbar-thumb{background:#cbd5e1;border-radius:10px;}
+code,pre{font-family:'JetBrains Mono',monospace;}
+
+/* ── SIDEBAR ── */
+.sidebar{
+  width:var(--sidebar);min-width:var(--sidebar);
+  background:var(--navy);
+  position:fixed;top:0;left:0;bottom:0;
+  overflow-y:auto;z-index:100;
+  display:flex;flex-direction:column;
+}
+.sidebar::-webkit-scrollbar-thumb{background:rgba(255,255,255,.15);}
+.sidebar-brand{
+  padding:22px 20px 16px;
+  border-bottom:1px solid rgba(255,255,255,.08);
+  flex-shrink:0;
+}
+.sb-logo{display:flex;align-items:center;gap:10px;margin-bottom:6px;}
+.sb-logo-box{width:32px;height:32px;background:var(--orange);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:900;color:#fff;flex-shrink:0;}
+.sb-logo-name{font-family:'Sora',sans-serif;font-size:14px;font-weight:800;color:#fff;}
+.sb-version{font-size:10px;color:rgba(255,255,255,.4);letter-spacing:.06em;margin-left:42px;}
+.sidebar-nav{flex:1;padding:12px 0 24px;}
+.sn-group{margin-bottom:4px;}
+.sn-group-label{font-size:10px;font-weight:700;color:rgba(255,255,255,.3);text-transform:uppercase;letter-spacing:.1em;padding:10px 20px 5px;}
+.sn-item{display:flex;align-items:center;gap:9px;padding:8px 20px;font-size:12.5px;font-weight:500;color:rgba(255,255,255,.6);cursor:pointer;transition:all .15s;text-decoration:none;border-left:2px solid transparent;}
+.sn-item:hover{background:rgba(255,255,255,.06);color:rgba(255,255,255,.9);}
+.sn-item.active{background:rgba(255,255,255,.1);color:#fff;font-weight:600;border-left-color:var(--orange);}
+.sn-item .sni{font-size:14px;flex-shrink:0;opacity:.7;}
+
+/* ── MAIN CONTENT ── */
+.main{margin-left:var(--sidebar);flex:1;min-width:0;}
+
+/* ── PAGE HEADER ── */
+.page-hero{
+  background:linear-gradient(135deg,var(--navy) 0%,var(--blue) 100%);
+  padding:48px 48px 40px;
+  position:relative;overflow:hidden;
+}
+.page-hero::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.03) 1px,transparent 1px);background-size:28px 28px;pointer-events:none;}
+.page-hero::after{content:'';position:absolute;top:-60px;right:60px;width:320px;height:320px;background:radial-gradient(circle,rgba(232,98,42,.15),transparent 70%);border-radius:50%;pointer-events:none;}
+.hero-eyebrow{font-size:11px;font-weight:700;color:rgba(255,255,255,.5);text-transform:uppercase;letter-spacing:.12em;margin-bottom:10px;position:relative;z-index:1;}
+.hero-title{font-family:'Sora',sans-serif;font-size:36px;font-weight:800;color:#fff;line-height:1.15;margin-bottom:10px;position:relative;z-index:1;}
+.hero-title span{color:var(--org2);}
+.hero-desc{font-size:15px;color:rgba(255,255,255,.65);line-height:1.65;max-width:540px;position:relative;z-index:1;}
+.hero-meta{display:flex;align-items:center;gap:10px;margin-top:20px;position:relative;z-index:1;}
+.hero-badge{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.16);color:rgba(255,255,255,.8);padding:4px 12px;border-radius:20px;font-size:11.5px;font-weight:600;}
+
+/* ── CONTENT AREA ── */
+.content{padding:40px 48px 80px;}
+
+/* ── SECTION ── */
+.ds-section{margin-bottom:60px;scroll-margin-top:24px;}
+.ds-section-header{margin-bottom:28px;padding-bottom:16px;border-bottom:2px solid var(--ds-border);}
+.ds-section-eyebrow{font-size:10.5px;font-weight:700;color:var(--orange);text-transform:uppercase;letter-spacing:.1em;margin-bottom:6px;}
+.ds-section-title{font-family:'Sora',sans-serif;font-size:24px;font-weight:800;color:var(--navy);}
+.ds-section-desc{font-size:14px;color:var(--gray);margin-top:6px;line-height:1.65;max-width:640px;}
+
+/* ── SUBSECTION ── */
+.ds-sub{margin-bottom:32px;}
+.ds-sub-title{font-size:14px;font-weight:700;color:var(--navy);margin-bottom:12px;display:flex;align-items:center;gap:8px;}
+.ds-sub-title::after{content:'';flex:1;height:1px;background:var(--ds-border);}
+.ds-sub-desc{font-size:13px;color:var(--gray);margin-bottom:14px;line-height:1.6;}
+
+/* ── CANVAS (live preview) ── */
+.ds-canvas{
+  background:#fff;border:1px solid var(--ds-border);
+  border-radius:var(--r);padding:28px 24px;
+  margin-bottom:0;
+}
+.ds-canvas.dark{background:var(--navy);}
+.ds-canvas.gray{background:var(--bg);}
+.ds-canvas.grid{display:grid;gap:12px;}
+
+/* ── CODE BLOCK ── */
+.ds-code-wrap{position:relative;margin-top:0;}
+.ds-code{
+  background:#0f172a;border-radius:0 0 var(--r) var(--r);
+  padding:16px 20px;font-size:12px;color:#e2e8f0;
+  overflow-x:auto;line-height:1.7;
+  border:1px solid #1e293b;border-top:none;
+}
+.ds-code .c-tag{color:#7dd3fc;}
+.ds-code .c-attr{color:#86efac;}
+.ds-code .c-val{color:#fca5a5;}
+.ds-code .c-class{color:#fde68a;}
+.ds-code .c-comment{color:#64748b;font-style:italic;}
+.copy-btn{
+  position:absolute;top:10px;right:12px;
+  background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);
+  color:rgba(255,255,255,.6);padding:4px 10px;border-radius:6px;
+  font-size:11px;font-weight:600;cursor:pointer;transition:all .15s;
+  font-family:'DM Sans',sans-serif;
+}
+.copy-btn:hover{background:rgba(255,255,255,.16);color:#fff;}
+
+/* ── COMPONENT CARD ── */
+.ds-component-card{
+  border:1px solid var(--ds-border);border-radius:var(--r);
+  overflow:hidden;margin-bottom:16px;
+}
+.dcc-preview{background:#fff;padding:24px;}
+.dcc-preview.dark{background:var(--navy);}
+.dcc-preview.gray{background:var(--bg);}
+.dcc-label{
+  background:#f8fafc;border-top:1px solid var(--ds-border);
+  padding:10px 16px;font-size:11px;font-weight:600;
+  color:var(--gray);font-family:'JetBrains Mono',monospace;
+}
+
+/* ── TOKEN TABLE ── */
+.token-table{width:100%;border-collapse:collapse;font-size:13px;}
+.token-table th{text-align:left;padding:10px 14px;font-size:10.5px;font-weight:700;color:var(--gray);text-transform:uppercase;letter-spacing:.07em;background:#f8fafc;border-bottom:1px solid var(--ds-border);}
+.token-table td{padding:11px 14px;border-bottom:1px solid var(--ds-border);vertical-align:middle;}
+.token-table tr:last-child td{border-bottom:none;}
+.token-table tr:hover td{background:#f8fafc;}
+.token-swatch{width:28px;height:28px;border-radius:7px;border:1px solid rgba(0,0,0,.08);flex-shrink:0;}
+.token-name{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--blue);}
+.token-value{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--gray);}
+.token-usage{font-size:12px;color:var(--gray);}
+
+/* ── DO / DON'T ── */
+.do-dont{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px;}
+.do-box,.dont-box{border-radius:var(--r2);overflow:hidden;border:1px solid var(--ds-border);}
+.do-box .dd-header{background:#e8f5e9;color:#15803d;padding:8px 14px;font-size:12px;font-weight:700;display:flex;align-items:center;gap:6px;}
+.dont-box .dd-header{background:#fde8e8;color:#b91c1c;padding:8px 14px;font-size:12px;font-weight:700;display:flex;align-items:center;gap:6px;}
+.dd-body{padding:16px;background:#fff;}
+
+/* ── SPACING VISUAL ── */
+.spacing-row{display:flex;align-items:flex-end;gap:16px;flex-wrap:wrap;}
+.sp-item{display:flex;flex-direction:column;align-items:center;gap:6px;}
+.sp-box{background:linear-gradient(135deg,var(--soft),var(--light));border:1px solid var(--light);border-radius:4px;}
+.sp-label{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--gray);}
+
+/* ── TYPE SCALE ── */
+.type-row{padding:14px 0;border-bottom:1px solid var(--ds-border);display:flex;align-items:baseline;gap:24px;}
+.type-row:last-child{border-bottom:none;}
+.type-meta{min-width:160px;flex-shrink:0;}
+.type-meta .tm-name{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--blue);margin-bottom:2px;}
+.type-meta .tm-spec{font-size:11px;color:var(--gray2);}
+
+/* ── ICON ROW ── */
+.icon-grid{display:flex;flex-wrap:wrap;gap:10px;}
+.icon-item{display:flex;flex-direction:column;align-items:center;gap:5px;padding:12px;background:#fff;border:1px solid var(--ds-border);border-radius:9px;min-width:70px;cursor:pointer;transition:all .15s;}
+.icon-item:hover{border-color:var(--blue);background:var(--soft);}
+.icon-item .ii-icon{font-size:20px;}
+.icon-item .ii-name{font-size:10px;color:var(--gray);text-align:center;}
+
+/* ── USAGE PILL ── */
+.usage-pill{display:inline-flex;align-items:center;gap:5px;padding:3px 10px;border-radius:20px;font-size:11px;font-weight:600;}
+.up-required{background:#fde8e8;color:#b91c1c;}
+.up-optional{background:#e8f5e9;color:#15803d;}
+.up-avoid{background:#fefce8;color:#a16207;}
+
+/* ── ANATOMY ── */
+.anatomy-wrap{position:relative;display:inline-block;}
+.anatomy-label{position:absolute;font-size:10px;font-weight:700;color:var(--navy);white-space:nowrap;display:flex;align-items:center;gap:4px;}
+.anatomy-dot{width:6px;height:6px;border-radius:50%;background:var(--orange);flex-shrink:0;}
+.anatomy-line{position:absolute;border:1px dashed var(--orange);pointer-events:none;}
+
+/* ── SECTION DIVIDER ── */
+.ds-divider{height:1px;background:var(--ds-border);margin:48px 0;}
+
+/* ────────────────────────────────────
+   ALL PORTAL COMPONENTS (copied from portal tokens)
+──────────────────────────────────── */
+
+/* Tags */
+.tag{display:inline-flex;align-items:center;gap:4px;padding:2px 9px;border-radius:20px;font-size:10.5px;font-weight:700;}
+.tag-o{background:rgba(232,98,42,.12);color:var(--orange);}
+.tag-b{background:var(--soft);color:var(--blue);}
+.tag-g{background:#e8f5e9;color:#2e7d32;}
+.tag-r{background:#fde8e8;color:#b91c1c;}
+.tag-y{background:#fefce8;color:#a16207;}
+.tag-gr{background:#f3f4f6;color:var(--gray);}
+.tag-pu{background:#f3e8ff;color:#7e22ce;}
+
+/* Buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:7px;padding:10px 20px;border-radius:9px;font-size:13px;font-weight:600;cursor:pointer;border:none;transition:all .18s;font-family:'DM Sans',sans-serif;}
+.btn-p{background:var(--orange);color:#fff;box-shadow:0 3px 12px rgba(232,98,42,.28);}
+.btn-p:hover{background:#d4561f;transform:translateY(-1px);}
+.btn-b{background:var(--blue);color:#fff;box-shadow:0 3px 12px rgba(26,58,181,.22);}
+.btn-b:hover{background:var(--blue2);transform:translateY(-1px);}
+.btn-s{background:var(--soft);color:var(--blue);border:1px solid var(--light);}
+.btn-s:hover{background:var(--light);}
+.btn-d{background:#f3f4f6;color:var(--gray);border:1px solid var(--ds-border);}
+.btn-d:hover{background:var(--light);}
+.btn-danger{background:#fde8e8;color:#b91c1c;border:1px solid #fecaca;}
+.btn-danger:hover{background:#fee2e2;}
+.btn-ghost{background:transparent;color:var(--blue);border:1px solid var(--blue);}
+.btn-ghost:hover{background:var(--soft);}
+.btn-lg{padding:13px 28px;font-size:14px;}
+.btn-sm{padding:7px 14px;font-size:12px;}
+.btn-xs{padding:4px 10px;font-size:11.5px;}
+.btn-icon{padding:9px;width:38px;height:38px;}
+.btn-icon.sm{width:30px;height:30px;padding:6px;}
+.btn:disabled{opacity:.45;cursor:not-allowed;transform:none !important;}
+
+/* SLA Pills */
+.sla-pill{display:inline-flex;align-items:center;gap:4px;padding:3px 9px;border-radius:20px;font-size:10.5px;font-weight:700;}
+.sla-ok{background:#e8f5e9;color:#15803d;}
+.sla-warn{background:#fefce8;color:#a16207;}
+.sla-over{background:#fde8e8;color:#b91c1c;}
+.sla-res{background:#f3f4f6;color:var(--gray);}
+.sla-dot{width:5px;height:5px;border-radius:50%;}
+.sla-ok .sla-dot{background:#15803d;}
+.sla-warn .sla-dot{background:#a16207;}
+.sla-over .sla-dot{background:#b91c1c;}
+.sla-res .sla-dot{background:var(--gray2);}
+
+/* Cards */
+.card{background:#fff;border-radius:var(--r);border:1px solid var(--light);box-shadow:var(--s1);overflow:hidden;}
+.card-hd{padding:13px 18px 11px;display:flex;align-items:center;gap:9px;border-bottom:1px solid var(--light);}
+.card-hd h2{font-size:14px;font-weight:700;color:var(--navy);flex:1;}
+.card-hd .chi{font-size:17px;}
+.card-body{padding:16px 18px;}
+
+/* KPI Card */
+.kpi-card{background:#fff;border-radius:var(--r2);border:1px solid var(--light);box-shadow:var(--s1);padding:16px 18px;position:relative;overflow:hidden;}
+.kpi-card::after{content:'';position:absolute;top:0;left:0;right:0;height:3px;border-radius:var(--r2) var(--r2) 0 0;}
+.kc-blue::after{background:linear-gradient(90deg,var(--blue),var(--blue2));}
+.kc-orange::after{background:linear-gradient(90deg,var(--orange),var(--org2));}
+.kc-green::after{background:linear-gradient(90deg,#22c55e,#16a34a);}
+.kc-red::after{background:linear-gradient(90deg,#ef4444,#dc2626);}
+.kpi-top{display:flex;justify-content:space-between;align-items:flex-start;}
+.kpi-icon{width:34px;height:34px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:16px;}
+.ki-b{background:linear-gradient(135deg,#dbeafe,#bfdbfe);}
+.ki-o{background:linear-gradient(135deg,#ffedd5,#fed7aa);}
+.ki-g{background:linear-gradient(135deg,#d1fae5,#a7f3d0);}
+.ki-r{background:linear-gradient(135deg,#fee2e2,#fecaca);}
+.kpi-val{font-family:'Sora',sans-serif;font-size:26px;font-weight:800;color:var(--navy);line-height:1;margin-top:10px;}
+.kpi-lbl{font-size:11px;color:var(--gray);margin-top:3px;}
+.kpi-trend{font-size:10.5px;font-weight:600;margin-top:4px;}
+.trend-up{color:var(--green);}
+.trend-dn{color:var(--red);}
+.trend-nt{color:var(--gray2);}
+
+/* Info Card */
+.info-card{background:#fff;border-radius:var(--r);border:1px solid var(--light);box-shadow:var(--s1);padding:14px 20px;display:flex;align-items:center;gap:14px;flex-wrap:wrap;}
+.ic-av{width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,var(--navy),var(--blue2));display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:14px;flex-shrink:0;}
+.ic-name{font-size:14px;font-weight:700;color:var(--navy);}
+.ic-role{font-size:11px;color:var(--gray);margin-top:1px;}
+.ic-sep{width:1px;height:32px;background:var(--light);}
+.ic-pill{display:flex;align-items:center;gap:5px;padding:4px 12px;border-radius:20px;font-size:11.5px;font-weight:600;}
+.icp-live{background:rgba(34,197,94,.1);color:#15803d;border:1px solid rgba(34,197,94,.2);}
+.icp-warn{background:rgba(239,68,68,.08);color:#b91c1c;border:1px solid rgba(239,68,68,.18);}
+.icp-scope{background:var(--soft);color:var(--blue);border:1px solid var(--light);}
+
+/* Pulse dot */
+.pulse-dot{width:7px;height:7px;border-radius:50%;background:var(--green);display:inline-block;animation:pls 2s infinite;}
+@keyframes pls{0%,100%{box-shadow:0 0 0 0 rgba(34,197,94,.5)}50%{box-shadow:0 0 0 5px rgba(34,197,94,0)}}
+
+/* Form inputs */
+.fi{width:100%;padding:9px 12px;border:1.5px solid var(--light);border-radius:9px;font-size:13px;background:#fff;transition:border-color .2s,box-shadow .2s;outline:none;color:var(--text);font-family:'DM Sans',sans-serif;}
+.fi:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(26,58,181,.08);}
+.fi.error{border-color:var(--red);}
+.fi.error:focus{box-shadow:0 0 0 3px rgba(239,68,68,.1);}
+.fi-sel{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%236b7280' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 11px center;padding-right:32px;}
+textarea.fi{resize:vertical;min-height:80px;line-height:1.55;}
+.fi-label{font-size:12px;font-weight:700;color:var(--navy);margin-bottom:5px;display:block;}
+.fi-hint{font-size:11px;color:var(--gray);margin-top:4px;}
+.fi-error{font-size:11px;color:var(--red);margin-top:4px;display:flex;align-items:center;gap:4px;}
+.fi-group{margin-bottom:14px;}
+
+/* Checkbox */
+.cb-item{display:flex;align-items:center;gap:9px;padding:9px 12px;border-radius:8px;border:1.5px solid var(--light);cursor:pointer;transition:all .15s;font-size:13px;}
+.cb-item:hover{border-color:var(--blue);background:var(--soft);}
+.cb-item.checked{border-color:var(--blue);background:var(--soft);color:var(--blue);font-weight:600;}
+.cb-item input[type=checkbox]{accent-color:var(--blue);width:14px;height:14px;}
+
+/* Navigation — Top Nav */
+.topnav-demo{background:var(--navy);height:54px;display:flex;align-items:center;padding:0 20px;gap:6px;border-radius:var(--r2);}
+.tn-logo-demo{display:flex;align-items:center;gap:9px;margin-right:14px;}
+.tn-logo-box{width:30px;height:30px;background:var(--orange);border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:900;color:#fff;}
+.tn-logo-txt span:first-child{display:block;font-family:'Sora',sans-serif;font-size:13px;font-weight:800;color:#fff;}
+.tn-logo-txt span:last-child{display:block;font-size:9px;color:rgba(255,255,255,.5);}
+.tn-links-demo{display:flex;gap:2px;flex:1;}
+.tn-link-demo{color:rgba(255,255,255,.62);padding:6px 12px;border-radius:8px;font-size:12.5px;font-weight:500;white-space:nowrap;}
+.tn-link-demo.on{background:rgba(255,255,255,.14);color:#fff;font-weight:600;}
+.tn-icon-demo{width:36px;height:36px;border-radius:9px;display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.7);font-size:17px;cursor:pointer;position:relative;}
+.tn-icon-demo .ib{position:absolute;top:4px;right:3px;width:15px;height:15px;background:var(--orange);border-radius:50%;font-size:8px;color:#fff;font-weight:700;display:flex;align-items:center;justify-content:center;border:1.5px solid var(--navy);}
+.tn-av-demo{width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,var(--navy),var(--blue2));display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:12px;border:2px solid rgba(255,255,255,.25);}
+
+/* Sub Nav */
+.subnav-demo{background:#fff;border:1px solid var(--light);border-radius:var(--r2);height:44px;display:flex;align-items:stretch;padding:0 12px;overflow:hidden;box-shadow:var(--s1);}
+.sn-demo{display:flex;align-items:center;gap:6px;padding:0 14px;font-size:12px;font-weight:600;color:var(--gray);cursor:pointer;border-bottom:3px solid transparent;}
+.sn-demo.on{color:var(--blue);border-bottom-color:var(--blue);}
+.sn-badge-demo{background:var(--orange);color:#fff;border-radius:10px;padding:1px 7px;font-size:10px;font-weight:700;}
+
+/* Table */
+.ds-table{width:100%;border-collapse:collapse;font-size:12.5px;}
+.ds-table th{text-align:left;font-size:10.5px;color:var(--gray);text-transform:uppercase;letter-spacing:.07em;padding:10px 14px;font-weight:700;background:#f8f9fb;border-bottom:1px solid var(--light);}
+.ds-table td{padding:11px 14px;border-bottom:1px solid var(--light);vertical-align:middle;}
+.ds-table tbody tr:last-child td{border-bottom:none;}
+.ds-table tbody tr:hover td{background:var(--soft);}
+.emp-cell{display:flex;align-items:center;gap:8px;}
+.emp-av-sm{width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,var(--soft),var(--light));border:1.5px solid var(--light);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:var(--navy);}
+
+/* Modal */
+.modal-demo{background:#fff;border-radius:var(--r);box-shadow:var(--s3);overflow:hidden;max-width:480px;}
+.modal-demo.sm{max-width:340px;}
+.modal-hd-demo{padding:16px 20px 14px;border-bottom:1px solid var(--light);display:flex;align-items:flex-start;gap:12px;}
+.modal-icon-demo{width:38px;height:38px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:19px;flex-shrink:0;}
+.mi-blue{background:linear-gradient(135deg,#dbeafe,#bfdbfe);}
+.mi-orange{background:linear-gradient(135deg,#ffedd5,#fed7aa);}
+.mi-green{background:linear-gradient(135deg,#d1fae5,#a7f3d0);}
+.mi-red{background:linear-gradient(135deg,#fee2e2,#fecaca);}
+.modal-hd-info h3{font-size:15px;font-weight:700;color:var(--navy);}
+.modal-hd-info p{font-size:12px;color:var(--gray);margin-top:3px;line-height:1.5;}
+.modal-close-demo{width:28px;height:28px;border-radius:7px;border:1.5px solid var(--light);background:#fff;display:flex;align-items:center;justify-content:center;font-size:13px;color:var(--gray);margin-left:auto;flex-shrink:0;}
+.modal-body-demo{padding:16px 20px;}
+.modal-ft-demo{padding:12px 20px;border-top:1px solid var(--light);display:flex;gap:8px;justify-content:flex-end;}
+
+/* Toast */
+.toast-demo{background:var(--navy);color:#fff;padding:11px 18px;border-radius:10px;font-size:13px;font-weight:600;box-shadow:var(--s3);display:inline-flex;align-items:center;gap:9px;}
+
+/* Remark timeline */
+.remark-item{display:flex;gap:11px;align-items:flex-start;padding:10px 0;border-bottom:1px solid var(--light);}
+.remark-item:last-child{border-bottom:none;}
+.remark-dot{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;flex-shrink:0;}
+.rd-sys{background:linear-gradient(135deg,#e0f2fe,#bae6fd);color:#0369a1;}
+.rd-pic{background:linear-gradient(135deg,var(--orange),var(--org2));color:#fff;}
+.rd-emp{background:linear-gradient(135deg,var(--blue),var(--blue2));color:#fff;}
+.rd-resolve{background:linear-gradient(135deg,#d1fae5,#a7f3d0);color:#15803d;}
+.rd-revert{background:linear-gradient(135deg,#ffedd5,#fed7aa);color:#c2410c;}
+.remark-content{flex:1;}
+.remark-type-badge{display:inline-flex;align-items:center;gap:4px;padding:1px 7px;border-radius:10px;font-size:10px;font-weight:700;margin-bottom:2px;}
+.rtb-system{background:#f0f9ff;color:#0369a1;}
+.rtb-pic{background:rgba(232,98,42,.1);color:var(--orange);}
+.rtb-emp{background:var(--soft);color:var(--blue);}
+.rtb-resolve{background:#e8f5e9;color:#15803d;}
+.rtb-revert{background:#fefce8;color:#a16207;}
+.remark-actor{font-size:11.5px;font-weight:700;color:var(--navy);}
+.remark-text{font-size:12.5px;color:var(--text);margin-top:2px;line-height:1.5;}
+.remark-time{font-size:10px;color:var(--gray2);margin-top:3px;}
+
+/* Attachment card */
+.att-card{display:flex;align-items:center;gap:10px;padding:9px 12px;background:#fff;border:1px solid var(--light);border-radius:9px;}
+.att-icon{width:34px;height:34px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0;background:linear-gradient(135deg,var(--soft),var(--light));}
+.att-info{flex:1;min-width:0;}
+.att-name{font-size:12.5px;font-weight:600;color:var(--navy);}
+.att-size{font-size:11px;color:var(--gray);margin-top:1px;}
+.att-remove{width:24px;height:24px;border-radius:6px;border:1.5px solid var(--light);background:#fff;display:flex;align-items:center;justify-content:center;font-size:12px;color:var(--gray);cursor:pointer;}
+
+/* LOB bar */
+.lob-item{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid var(--light);}
+.lob-item:last-child{border-bottom:none;}
+.lob-name{font-size:12px;font-weight:600;color:var(--navy);min-width:120px;}
+.lob-bar-wrap{flex:1;height:13px;background:var(--soft);border-radius:4px;overflow:hidden;}
+.lob-bar{height:100%;border-radius:4px;background:linear-gradient(90deg,var(--blue),var(--blue2));}
+.lob-val{font-family:'Sora',sans-serif;font-size:12px;font-weight:700;color:var(--navy);min-width:36px;text-align:right;}
+
+/* Filter bar */
+.filter-bar{background:#fff;border:1px solid var(--light);border-radius:var(--r2);padding:10px 16px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;box-shadow:var(--s1);}
+.filter-lbl{font-size:11px;font-weight:700;color:var(--gray);text-transform:uppercase;letter-spacing:.07em;}
+.filter-sel-sm{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='11' height='11' viewBox='0 0 24 24' fill='none' stroke='%236b7280' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 9px center;padding:6px 26px 6px 10px;border:1.5px solid var(--light);border-radius:8px;font-size:12px;font-weight:500;color:var(--text);background-color:#fff;outline:none;font-family:'DM Sans',sans-serif;}
+
+/* Shadow tokens visual */
+.shadow-card{background:#fff;border-radius:var(--r);padding:20px;text-align:center;}
+
+/* AI suggestion item */
+.ai-sug-demo{padding:8px 12px;border-radius:8px;border:1.5px solid var(--light);font-size:12.5px;margin-bottom:5px;color:var(--text);}
+.ai-sug-demo::before{content:'→ ';color:var(--blue);font-weight:700;}
+.ai-sug-demo.selected{border-color:var(--blue);background:var(--soft);color:var(--blue);font-weight:600;}
+
+/* Pager */
+.pager{display:flex;gap:4px;}
+.pg-btn{width:30px;height:30px;border-radius:7px;border:1.5px solid var(--light);background:#fff;font-size:12.5px;font-weight:600;color:var(--gray);cursor:pointer;display:flex;align-items:center;justify-content:center;}
+.pg-btn.on{background:var(--blue);border-color:var(--blue);color:#fff;}
+.pg-btn:disabled{opacity:.35;cursor:not-allowed;}
+
+/* Tooltip */
+.tooltip-demo{position:relative;display:inline-block;}
+.tooltip-demo::after{content:attr(data-tip);position:absolute;bottom:calc(100%+7px);left:50%;transform:translateX(-50%);background:var(--navy);color:#fff;font-size:11px;font-weight:500;padding:5px 10px;border-radius:7px;white-space:nowrap;pointer-events:none;opacity:0;transition:opacity .18s;z-index:800;}
+.tooltip-demo::before{content:'';position:absolute;bottom:calc(100%+2px);left:50%;transform:translateX(-50%);border:5px solid transparent;border-top-color:var(--navy);pointer-events:none;opacity:0;transition:opacity .18s;z-index:800;}
+.tooltip-demo:hover::after,.tooltip-demo:hover::before{opacity:1;}
+
+/* Status toggle */
+.status-toggle{display:inline-flex;align-items:center;gap:5px;padding:3px 10px;border-radius:20px;font-size:11px;font-weight:700;cursor:pointer;border:none;}
+.st-active{background:#e8f5e9;color:#15803d;}
+.st-inactive{background:#f3f4f6;color:var(--gray);}
+
+/* Grid helpers */
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;}
+.g4{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;}
+</style>
+</head>
+<body>
+
+<!-- ── SIDEBAR ── -->
+<nav class="sidebar">
+  <div class="sidebar-brand">
+    <div class="sb-logo">
+      <div class="sb-logo-box">TM</div>
+      <div class="sb-logo-name">TM HR Portal</div>
+    </div>
+    <div class="sb-version">Design System v1.0 · 2026</div>
+  </div>
+  <div class="sidebar-nav">
+    <div class="sn-group">
+      <div class="sn-group-label">Introduction</div>
+      <a class="sn-item active" href="#overview"><span class="sni">👋</span> Overview</a>
+      <a class="sn-item" href="#principles"><span class="sni">💡</span> Principles</a>
+    </div>
+    <div class="sn-group">
+      <div class="sn-group-label">Foundations</div>
+      <a class="sn-item" href="#colours"><span class="sni">🎨</span> Colours</a>
+      <a class="sn-item" href="#typography"><span class="sni">🔤</span> Typography</a>
+      <a class="sn-item" href="#spacing"><span class="sni">📐</span> Spacing</a>
+      <a class="sn-item" href="#shadows"><span class="sni">🌫️</span> Shadows & Radius</a>
+    </div>
+    <div class="sn-group">
+      <div class="sn-group-label">Components</div>
+      <a class="sn-item" href="#buttons"><span class="sni">🔘</span> Buttons</a>
+      <a class="sn-item" href="#tags"><span class="sni">🏷️</span> Tags & Badges</a>
+      <a class="sn-item" href="#inputs"><span class="sni">✏️</span> Form Inputs</a>
+      <a class="sn-item" href="#cards"><span class="sni">🃏</span> Cards</a>
+      <a class="sn-item" href="#navigation"><span class="sni">🧭</span> Navigation</a>
+      <a class="sn-item" href="#tables"><span class="sni">📋</span> Tables</a>
+      <a class="sn-item" href="#modals"><span class="sni">🪟</span> Modals</a>
+      <a class="sn-item" href="#feedback"><span class="sni">💬</span> Feedback</a>
+    </div>
+    <div class="sn-group">
+      <div class="sn-group-label">Patterns</div>
+      <a class="sn-item" href="#ticket-patterns"><span class="sni">🎫</span> Ticket Patterns</a>
+      <a class="sn-item" href="#filter-patterns"><span class="sni">🔍</span> Filter & Search</a>
+      <a class="sn-item" href="#data-display"><span class="sni">📊</span> Data Display</a>
+      <a class="sn-item" href="#empty-states"><span class="sni">📭</span> Empty States</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ── MAIN ── -->
+<main class="main">
+
+  <!-- Hero -->
+  <div class="page-hero">
+    <div class="hero-eyebrow">Telekom Malaysia · GHCM HR Portal</div>
+    <div class="hero-title">TM HR Portal<br><span>Design System</span></div>
+    <div class="hero-desc">A comprehensive reference for building consistent, accessible, and on-brand interfaces for the AskHR Ticketing and HR Portal ecosystem.</div>
+    <div class="hero-meta">
+      <div class="hero-badge">v1.0 · 2026</div>
+      <div class="hero-badge">AskHR Ticketing</div>
+      <div class="hero-badge">GHCM · Employee Central</div>
+    </div>
+  </div>
+
+  <div class="content">
+
+    <!-- ══════════════════════════════
+         OVERVIEW
+    ══════════════════════════════ -->
+    <div class="ds-section" id="overview">
+      <div class="ds-section-header">
+        <div class="ds-section-eyebrow">Introduction</div>
+        <div class="ds-section-title">Overview</div>
+        <div class="ds-section-desc">The TM HR Portal Design System defines the visual language, interaction patterns, and component library used across all modules of the GHCM HR Portal — including AskHR Ticketing, Employee Central, Skills Dashboard, and IDP.</div>
+      </div>
+      <div class="g3">
+        <div style="background:#fff;border-radius:var(--r);border:1px solid var(--light);padding:20px;">
+          <div style="font-size:24px;margin-bottom:10px;">🎨</div>
+          <div style="font-size:14px;font-weight:700;color:var(--navy);margin-bottom:6px;">Consistent Tokens</div>
+          <div style="font-size:13px;color:var(--gray);line-height:1.6;">CSS variables define all colours, spacing, shadows and radii. Change once, apply everywhere.</div>
+        </div>
+        <div style="background:#fff;border-radius:var(--r);border:1px solid var(--light);padding:20px;">
+          <div style="font-size:24px;margin-bottom:10px;">🧩</div>
+          <div style="font-size:14px;font-weight:700;color:var(--navy);margin-bottom:6px;">Reusable Components</div>
+          <div style="font-size:13px;color:var(--gray);line-height:1.6;">Every button, card, modal, and table follows the same structure and class conventions across all pages.</div>
+        </div>
+        <div style="background:#fff;border-radius:var(--r);border:1px solid var(--light);padding:20px;">
+          <div style="font-size:24px;margin-bottom:10px;">📐</div>
+          <div style="font-size:14px;font-weight:700;color:var(--navy);margin-bottom:6px;">Clear Patterns</div>
+          <div style="font-size:13px;color:var(--gray);line-height:1.6;">Interaction patterns like filter bars, ticket flows, and audit trails are documented with live examples.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════
+         PRINCIPLES
+    ══════════════════════════════ -->
+    <div class="ds-section" id="principles">
+      <div class="ds-section-header">
+        <div class="ds-section-eyebrow">Introduction</div>
+        <div class="ds-section-title">Design Principles</div>
+      </div>
+      <div class="g2">
+        <div style="background:#fff;border-radius:var(--r);border:1px solid var(--light);padding:22px;">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;"><div style="width:36px;height:36px;border-radius:9px;background:linear-gradient(135deg,#dbeafe,#bfdbfe);display:flex;align-items:center;justify-content:center;font-size:18px;">🎯</div><div style="font-size:14px;font-weight:700;color:var(--navy);">Task-first, not feature-first</div></div>
+          <div style="font-size:13px;color:var(--gray);line-height:1.65;">Every screen exists to help a user complete a task — raising a ticket, resolving an issue, or monitoring performance. Decorative complexity is avoided unless it aids comprehension.</div>
+        </div>
+        <div style="background:#fff;border-radius:var(--r);border:1px solid var(--light);padding:22px;">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;"><div style="width:36px;height:36px;border-radius:9px;background:linear-gradient(135deg,#d1fae5,#a7f3d0);display:flex;align-items:center;justify-content:center;font-size:18px;">🔍</div><div style="font-size:14px;font-weight:700;color:var(--navy);">Clear visual hierarchy</div></div>
+          <div style="font-size:13px;color:var(--gray);line-height:1.65;">Navy anchors authority. Blue drives action. Orange signals primary CTAs. Status colours (green, yellow, red) are reserved strictly for states — never decorative use.</div>
+        </div>
+        <div style="background:#fff;border-radius:var(--r);border:1px solid var(--light);padding:22px;">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;"><div style="width:36px;height:36px;border-radius:9px;background:linear-gradient(135deg,#ffedd5,#fed7aa);display:flex;align-items:center;justify-content:center;font-size:18px;">⚡</div><div style="font-size:14px;font-weight:700;color:var(--navy);">Immediate feedback</div></div>
+          <div style="font-size:13px;color:var(--gray);line-height:1.65;">Every action should produce visible feedback — toast on submit, animated value update on filter change, status tag update on ticket action. Users should never wonder if something worked.</div>
+        </div>
+        <div style="background:#fff;border-radius:var(--r);border:1px solid var(--light);padding:22px;">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;"><div style="width:36px;height:36px;border-radius:9px;background:linear-gradient(135deg,#ede9fe,#ddd6fe);display:flex;align-items:center;justify-content:center;font-size:18px;">🔒</div><div style="font-size:14px;font-weight:700;color:var(--navy);">Role-aware UI</div></div>
+          <div style="font-size:13px;color:var(--gray);line-height:1.65;">The interface surface adapts to the user's role (Employee, PIC, Super Admin). Components are shared; visibility and access are controlled by RBAC at runtime, not by building separate UIs.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ds-divider"></div>
+
+    <!-- ══════════════════════════════
+         COLOURS
+    ══════════════════════════════ -->
+    <div class="ds-section" id="colours">
+      <div class="ds-section-header">
+        <div class="ds-section-eyebrow">Foundations</div>
+        <div class="ds-section-title">Colour Tokens</div>
+        <div class="ds-section-desc">All colours are defined as CSS custom properties on <code style="background:var(--soft);padding:2px 6px;border-radius:4px;font-size:12px;">:root</code>. Never use hardcoded hex values in component styles — always reference a token.</div>
+      </div>
+
+      <div class="ds-sub">
+        <div class="ds-sub-title">Brand Colours</div>
+        <table class="token-table" style="background:#fff;border-radius:var(--r);border:1px solid var(--ds-border);">
+          <thead><tr><th>Swatch</th><th>Token</th><th>Value</th><th>Usage</th></tr></thead>
+          <tbody>
+            <tr><td><div class="token-swatch" style="background:#0d1b4b;"></div></td><td class="token-name">--navy</td><td class="token-value">#0d1b4b</td><td class="token-usage">Page backgrounds, top nav, headings, strong emphasis</td></tr>
+            <tr><td><div class="token-swatch" style="background:#152060;"></div></td><td class="token-name">--navy2</td><td class="token-value">#152060</td><td class="token-usage">Secondary navy surfaces, hover on navy elements</td></tr>
+            <tr><td><div class="token-swatch" style="background:#1a3ab5;"></div></td><td class="token-name">--blue</td><td class="token-value">#1a3ab5</td><td class="token-usage">Primary interactive colour, links, secondary CTA, active states</td></tr>
+            <tr><td><div class="token-swatch" style="background:#2248cc;"></div></td><td class="token-name">--blue2</td><td class="token-value">#2248cc</td><td class="token-usage">Blue gradients, hover on blue, chart bars</td></tr>
+            <tr><td><div class="token-swatch" style="background:#e8622a;"></div></td><td class="token-name">--orange</td><td class="token-value">#e8622a</td><td class="token-usage">Primary CTA buttons, logo, notifications, overdue indicators</td></tr>
+            <tr><td><div class="token-swatch" style="background:#f97316;"></div></td><td class="token-name">--org2</td><td class="token-value">#f97316</td><td class="token-usage">Orange gradients, avatar backgrounds</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="ds-sub">
+        <div class="ds-sub-title">Neutral & Background</div>
+        <table class="token-table" style="background:#fff;border-radius:var(--r);border:1px solid var(--ds-border);">
+          <thead><tr><th>Swatch</th><th>Token</th><th>Value</th><th>Usage</th></tr></thead>
+          <tbody>
+            <tr><td><div class="token-swatch" style="background:#f0f4ff;border:1px solid #e5eaf8;"></div></td><td class="token-name">--soft</td><td class="token-value">#f0f4ff</td><td class="token-usage">Hover backgrounds, chip active state, input focus background</td></tr>
+            <tr><td><div class="token-swatch" style="background:#e5eaf8;"></div></td><td class="token-name">--light</td><td class="token-value">#e5eaf8</td><td class="token-usage">Borders, dividers, table row borders, card borders</td></tr>
+            <tr><td><div class="token-swatch" style="background:#f1f4f9;"></div></td><td class="token-name">--bg</td><td class="token-value">#f1f4f9</td><td class="token-usage">Page background, secondary surface background</td></tr>
+            <tr><td><div class="token-swatch" style="background:#fff;border:1px solid #e5eaf8;"></div></td><td class="token-name">--white</td><td class="token-value">#ffffff</td><td class="token-usage">Card backgrounds, modal backgrounds, input backgrounds</td></tr>
+            <tr><td><div class="token-swatch" style="background:#6b7280;"></div></td><td class="token-name">--gray</td><td class="token-value">#6b7280</td><td class="token-usage">Secondary text, labels, sub-information</td></tr>
+            <tr><td><div class="token-swatch" style="background:#9ca3af;"></div></td><td class="token-name">--gray2</td><td class="token-value">#9ca3af</td><td class="token-usage">Placeholder text, timestamps, tertiary info</td></tr>
+            <tr><td><div class="token-swatch" style="background:#1e293b;"></div></td><td class="token-name">--text</td><td class="token-value">#1e293b</td><td class="token-usage">Body text, table cell content</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="ds-sub">
+        <div class="ds-sub-title">Semantic / Status Colours</div>
+        <div class="ds-sub-desc">Status colours communicate state — on-track, warning, overdue, or resolved. Never use these colours for decoration.</div>
+        <table class="token-table" style="background:#fff;border-radius:var(--r);border:1px solid var(--ds-border);">
+          <thead><tr><th>Swatch</th><th>Token</th><th>Value</th><th>Meaning</th></tr></thead>
+          <tbody>
+            <tr><td><div class="token-swatch" style="background:#22c55e;"></div></td><td class="token-name">--green</td><td class="token-value">#22c55e</td><td class="token-usage">On track, resolved, achieved, active, success</td></tr>
+            <tr><td><div class="token-swatch" style="background:#fbbf24;"></div></td><td class="token-name">--yellow</td><td class="token-value">#fbbf24</td><td class="token-usage">Due soon, pending review, warning</td></tr>
+            <tr><td><div class="token-swatch" style="background:#ef4444;"></div></td><td class="token-name">--red</td><td class="token-value">#ef4444</td><td class="token-usage">Overdue, violated, error, destructive action</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════
+         TYPOGRAPHY
+    ══════════════════════════════ -->
+    <div class="ds-section" id="typography">
+      <div class="ds-section-header">
+        <div class="ds-section-eyebrow">Foundations</div>
+        <div class="ds-section-title">Typography</div>
+        <div class="ds-section-desc">Two typefaces are used. <strong>Sora</strong> for display headings, numbers, and KPI values. <strong>DM Sans</strong> for all body copy, labels, and UI text. Code uses <strong>JetBrains Mono</strong>.</div>
+      </div>
+      <div class="ds-canvas" style="padding:28px 32px;">
+        <div class="type-row">
+          <div class="type-meta"><div class="tm-name">Display / KPI</div><div class="tm-spec">Sora 800 · 26–36px</div></div>
+          <div style="font-family:'Sora',sans-serif;font-size:32px;font-weight:800;color:var(--navy);line-height:1;">8,128</div>
+        </div>
+        <div class="type-row">
+          <div class="type-meta"><div class="tm-name">Page Title</div><div class="tm-spec">Sora 800 · 20px</div></div>
+          <div style="font-family:'Sora',sans-serif;font-size:20px;font-weight:800;color:var(--navy);">AskHR Ticketing Dashboard</div>
+        </div>
+        <div class="type-row">
+          <div class="type-meta"><div class="tm-name">Section Title</div><div class="tm-spec">Sora 700 · 16px</div></div>
+          <div style="font-family:'Sora',sans-serif;font-size:16px;font-weight:700;color:var(--navy);">Performance by Month</div>
+        </div>
+        <div class="type-row">
+          <div class="type-meta"><div class="tm-name">Card Header</div><div class="tm-spec">DM Sans 700 · 14px</div></div>
+          <div style="font-size:14px;font-weight:700;color:var(--navy);">Ticket ID: ASKHR-14892</div>
+        </div>
+        <div class="type-row">
+          <div class="type-meta"><div class="tm-name">Body / Cell</div><div class="tm-spec">DM Sans 500 · 13px</div></div>
+          <div style="font-size:13px;font-weight:500;color:var(--text);">Payslip not showing deduction breakdown for March 2026</div>
+        </div>
+        <div class="type-row">
+          <div class="type-meta"><div class="tm-name">Label / Meta</div><div class="tm-spec">DM Sans 600 · 12px</div></div>
+          <div style="font-size:12px;font-weight:600;color:var(--gray);">Submitted: 18 Mar 2026, 7:12 AM</div>
+        </div>
+        <div class="type-row">
+          <div class="type-meta"><div class="tm-name">Caption / Timestamp</div><div class="tm-spec">DM Sans 400 · 10.5–11px</div></div>
+          <div style="font-size:11px;color:var(--gray2);">Last updated: 19 Mar 2026, 9:42 AM</div>
+        </div>
+        <div class="type-row">
+          <div class="type-meta"><div class="tm-name">Table Header</div><div class="tm-spec">DM Sans 700 · 10.5px uppercase</div></div>
+          <div style="font-size:10.5px;font-weight:700;color:var(--gray);text-transform:uppercase;letter-spacing:.07em;">Ticket ID</div>
+        </div>
+        <div class="type-row">
+          <div class="type-meta"><div class="tm-name">Code / ID</div><div class="tm-spec">JetBrains Mono 700 · 11.5px</div></div>
+          <div style="font-family:'JetBrains Mono',monospace;font-size:11.5px;font-weight:700;color:var(--blue);">ASKHR-14892</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════
+         SPACING
+    ══════════════════════════════ -->
+    <div class="ds-section" id="spacing">
+      <div class="ds-section-header">
+        <div class="ds-section-eyebrow">Foundations</div>
+        <div class="ds-section-title">Spacing</div>
+        <div class="ds-section-desc">Spacing follows a 4px base unit. Common values used throughout the system:</div>
+      </div>
+      <div class="ds-canvas">
+        <div class="spacing-row">
+          <div class="sp-item"><div class="sp-box" style="width:4px;height:4px;"></div><div class="sp-label">4px</div></div>
+          <div class="sp-item"><div class="sp-box" style="width:6px;height:6px;"></div><div class="sp-label">6px</div></div>
+          <div class="sp-item"><div class="sp-box" style="width:8px;height:8px;"></div><div class="sp-label">8px</div></div>
+          <div class="sp-item"><div class="sp-box" style="width:10px;height:10px;"></div><div class="sp-label">10px</div></div>
+          <div class="sp-item"><div class="sp-box" style="width:12px;height:12px;"></div><div class="sp-label">12px</div></div>
+          <div class="sp-item"><div class="sp-box" style="width:14px;height:14px;"></div><div class="sp-label">14px</div></div>
+          <div class="sp-item"><div class="sp-box" style="width:16px;height:16px;"></div><div class="sp-label">16px</div></div>
+          <div class="sp-item"><div class="sp-box" style="width:20px;height:20px;"></div><div class="sp-label">20px</div></div>
+          <div class="sp-item"><div class="sp-box" style="width:24px;height:24px;"></div><div class="sp-label">24px</div></div>
+          <div class="sp-item"><div class="sp-box" style="width:28px;height:28px;"></div><div class="sp-label">28px</div></div>
+          <div class="sp-item"><div class="sp-box" style="width:32px;height:32px;"></div><div class="sp-label">32px</div></div>
+          <div class="sp-item"><div class="sp-box" style="width:40px;height:40px;"></div><div class="sp-label">40px</div></div>
+          <div class="sp-item"><div class="sp-box" style="width:48px;height:48px;"></div><div class="sp-label">48px</div></div>
+        </div>
+        <div style="margin-top:20px;display:grid;grid-template-columns:repeat(3,1fr);gap:14px;">
+          <div style="background:var(--soft);border-radius:9px;padding:14px;">
+            <div style="font-size:11px;font-weight:700;color:var(--gray2);text-transform:uppercase;margin-bottom:8px;">Component Padding</div>
+            <div style="font-size:12.5px;color:var(--text);line-height:2;">Card body: 16–18px<br>Button (default): 10px 20px<br>Button (sm): 7px 14px<br>Table cell: 11px 14px<br>Input: 9px 12px<br>Modal: 16–20px</div>
+          </div>
+          <div style="background:var(--soft);border-radius:9px;padding:14px;">
+            <div style="font-size:11px;font-weight:700;color:var(--gray2);text-transform:uppercase;margin-bottom:8px;">Layout Gaps</div>
+            <div style="font-size:12.5px;color:var(--text);line-height:2;">Section gap: 14–16px<br>Grid-2 gap: 14px<br>Grid-3 gap: 14px<br>Card gap: 12px<br>Filter bar items: 10px<br>Button row: 8px</div>
+          </div>
+          <div style="background:var(--soft);border-radius:9px;padding:14px;">
+            <div style="font-size:11px;font-weight:700;color:var(--gray2);text-transform:uppercase;margin-bottom:8px;">Page Layout</div>
+            <div style="font-size:12.5px;color:var(--text);line-height:2;">Page body: 18–20px<br>Top nav height: 54px<br>Sub nav height: 44px<br>Sidebar width: 260px<br>Max content: 1280–1300px</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════
+         SHADOWS & RADIUS
+    ══════════════════════════════ -->
+    <div class="ds-section" id="shadows">
+      <div class="ds-section-header">
+        <div class="ds-section-eyebrow">Foundations</div>
+        <div class="ds-section-title">Shadows & Border Radius</div>
+      </div>
+      <div class="ds-sub">
+        <div class="ds-sub-title">Shadow Scale</div>
+        <div class="g3">
+          <div class="shadow-card" style="box-shadow:0 1px 4px rgba(13,27,75,.07);">
+            <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--blue);margin-bottom:4px;">--s1</div>
+            <div style="font-size:12px;color:var(--gray);">Cards, tables, toolbars</div>
+          </div>
+          <div class="shadow-card" style="box-shadow:0 4px 20px rgba(13,27,75,.10);">
+            <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--blue);margin-bottom:4px;">--s2</div>
+            <div style="font-size:12px;color:var(--gray);">Hover state, dropdowns</div>
+          </div>
+          <div class="shadow-card" style="box-shadow:0 8px 40px rgba(13,27,75,.18);">
+            <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--blue);margin-bottom:4px;">--s3</div>
+            <div style="font-size:12px;color:var(--gray);">Modals, toasts, overlays</div>
+          </div>
+        </div>
+      </div>
+      <div class="ds-sub">
+        <div class="ds-sub-title">Border Radius Scale</div>
+        <div style="display:flex;gap:20px;flex-wrap:wrap;padding:20px;background:#fff;border-radius:var(--r);border:1px solid var(--ds-border);">
+          <div style="display:flex;flex-direction:column;align-items:center;gap:8px;"><div style="width:40px;height:40px;background:var(--soft);border:1px solid var(--light);border-radius:4px;"></div><div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--gray);">4px</div><div style="font-size:11px;color:var(--gray2);">Tight</div></div>
+          <div style="display:flex;flex-direction:column;align-items:center;gap:8px;"><div style="width:40px;height:40px;background:var(--soft);border:1px solid var(--light);border-radius:6px;"></div><div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--gray);">6–7px</div><div style="font-size:11px;color:var(--gray2);">Buttons, chips</div></div>
+          <div style="display:flex;flex-direction:column;align-items:center;gap:8px;"><div style="width:40px;height:40px;background:var(--soft);border:1px solid var(--light);border-radius:8px;"></div><div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--gray);">8–9px</div><div style="font-size:11px;color:var(--gray2);">Inputs, sub-sections</div></div>
+          <div style="display:flex;flex-direction:column;align-items:center;gap:8px;"><div style="width:40px;height:40px;background:var(--soft);border:1px solid var(--light);border-radius:10px;"></div><div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--gray);">--r2 (10px)</div><div style="font-size:11px;color:var(--gray2);">Stat cards, toolbars</div></div>
+          <div style="display:flex;flex-direction:column;align-items:center;gap:8px;"><div style="width:40px;height:40px;background:var(--soft);border:1px solid var(--light);border-radius:14px;"></div><div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--gray);">--r (14px)</div><div style="font-size:11px;color:var(--gray2);">Main cards, modals</div></div>
+          <div style="display:flex;flex-direction:column;align-items:center;gap:8px;"><div style="width:40px;height:40px;background:var(--soft);border:1px solid var(--light);border-radius:20px;"></div><div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--gray);">20px</div><div style="font-size:11px;color:var(--gray2);">Pills, tags, chips</div></div>
+          <div style="display:flex;flex-direction:column;align-items:center;gap:8px;"><div style="width:40px;height:40px;background:var(--soft);border:1px solid var(--light);border-radius:50%;"></div><div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--gray);">50%</div><div style="font-size:11px;color:var(--gray2);">Avatars, dots</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ds-divider"></div>
+
+    <!-- ══════════════════════════════
+         BUTTONS
+    ══════════════════════════════ -->
+    <div class="ds-section" id="buttons">
+      <div class="ds-section-header">
+        <div class="ds-section-eyebrow">Components</div>
+        <div class="ds-section-title">Buttons</div>
+        <div class="ds-section-desc">Buttons communicate actions. Use the primary orange button for the single most important action per view. Avoid having two primary buttons side by side.</div>
+      </div>
+
+      <div class="ds-sub">
+        <div class="ds-sub-title">Variants</div>
+        <div class="ds-canvas" style="display:flex;flex-wrap:wrap;gap:10px;align-items:center;">
+          <button class="btn btn-p">Primary</button>
+          <button class="btn btn-b">Blue</button>
+          <button class="btn btn-s">Secondary</button>
+          <button class="btn btn-d">Default</button>
+          <button class="btn btn-ghost">Ghost</button>
+          <button class="btn btn-danger">Danger</button>
+        </div>
+        <table class="token-table" style="background:#fff;border-radius:0 0 var(--r) var(--r);border:1px solid var(--ds-border);border-top:none;">
+          <thead><tr><th>Class</th><th>Use case</th><th>Example</th></tr></thead>
+          <tbody>
+            <tr><td class="token-name">.btn-p</td><td>Primary CTA — one per view maximum. Submit, Create, Confirm.</td><td>✚ Create Ticket, ✅ Confirm Resolve</td></tr>
+            <tr><td class="token-name">.btn-b</td><td>Secondary brand action. Add, Save.</td><td>➕ Add PIC, 💾 Save Changes</td></tr>
+            <tr><td class="token-name">.btn-s</td><td>Soft action paired with primary. Export, View.</td><td>⬇️ Export, 👁 View</td></tr>
+            <tr><td class="token-name">.btn-d</td><td>Neutral/dismiss. Cancel, Close.</td><td>Cancel, Close</td></tr>
+            <tr><td class="token-name">.btn-ghost</td><td>Low-emphasis on coloured backgrounds.</td><td>View Details</td></tr>
+            <tr><td class="token-name">.btn-danger</td><td>Destructive or warning action.</td><td>Delete, Remove</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="ds-sub">
+        <div class="ds-sub-title">Sizes</div>
+        <div class="ds-canvas" style="display:flex;flex-wrap:wrap;gap:10px;align-items:center;">
+          <button class="btn btn-p btn-lg">Large</button>
+          <button class="btn btn-p">Default</button>
+          <button class="btn btn-p btn-sm">Small</button>
+          <button class="btn btn-p btn-xs">XSmall</button>
+          <button class="btn btn-s btn-icon">🔔</button>
+          <button class="btn btn-s btn-icon sm">⚙️</button>
+        </div>
+        <table class="token-table" style="background:#fff;border-radius:0 0 var(--r) var(--r);border:1px solid var(--ds-border);border-top:none;">
+          <thead><tr><th>Class</th><th>Padding</th><th>Font</th><th>Use case</th></tr></thead>
+          <tbody>
+            <tr><td class="token-name">.btn-lg</td><td class="token-value">13px 28px</td><td>14px</td><td>Hero CTAs, empty states</td></tr>
+            <tr><td class="token-name">(default)</td><td class="token-value">10px 20px</td><td>13px</td><td>Modal footers, card actions</td></tr>
+            <tr><td class="token-name">.btn-sm</td><td class="token-value">7px 14px</td><td>12px</td><td>Toolbars, inline actions, info cards</td></tr>
+            <tr><td class="token-name">.btn-xs</td><td class="token-value">4px 10px</td><td>11.5px</td><td>Table row actions, tight spaces</td></tr>
+            <tr><td class="token-name">.btn-icon</td><td class="token-value">9px (38×38)</td><td>17px</td><td>Top nav icon buttons</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="ds-sub">
+        <div class="ds-sub-title">States</div>
+        <div class="ds-canvas" style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;">
+          <button class="btn btn-p">Normal</button>
+          <button class="btn btn-p" style="transform:translateY(-1px);box-shadow:0 5px 18px rgba(232,98,42,.4);">Hover</button>
+          <button class="btn btn-p" disabled>Disabled</button>
+          <button class="btn btn-p" style="opacity:.7;">Loading…</button>
+        </div>
+      </div>
+
+      <div class="do-dont">
+        <div class="do-box">
+          <div class="dd-header">✅ Do</div>
+          <div class="dd-body" style="display:flex;flex-direction:column;gap:8px;">
+            <div style="font-size:13px;color:var(--text);">Use one primary button per modal footer</div>
+            <div style="display:flex;gap:8px;"><button class="btn btn-d btn-sm">Cancel</button><button class="btn btn-p btn-sm">✅ Confirm Resolve</button></div>
+          </div>
+        </div>
+        <div class="dont-box">
+          <div class="dd-header">❌ Don't</div>
+          <div class="dd-body" style="display:flex;flex-direction:column;gap:8px;">
+            <div style="font-size:13px;color:var(--text);">Never use two primary buttons together</div>
+            <div style="display:flex;gap:8px;"><button class="btn btn-p btn-sm">Resolve</button><button class="btn btn-p btn-sm">Reassign</button></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════
+         TAGS & BADGES
+    ══════════════════════════════ -->
+    <div class="ds-section" id="tags">
+      <div class="ds-section-header">
+        <div class="ds-section-eyebrow">Components</div>
+        <div class="ds-section-title">Tags, Badges & Pills</div>
+        <div class="ds-section-desc">Tags communicate status, category, and metadata at a glance. Status colours are strictly reserved — do not apply green/red tags for non-status purposes.</div>
+      </div>
+
+      <div class="ds-sub">
+        <div class="ds-sub-title">Status Tags</div>
+        <div class="ds-canvas" style="display:flex;flex-wrap:wrap;gap:8px;align-items:center;">
+          <span class="tag tag-y">Pending Review</span>
+          <span class="tag tag-b">In Progress</span>
+          <span class="tag tag-o">Pending Employee</span>
+          <span class="tag tag-g">Resolved</span>
+          <span class="tag tag-gr">Closed</span>
+          <span class="tag tag-r">Overdue</span>
+          <span class="tag tag-pu">Reverted</span>
+        </div>
+        <table class="token-table" style="background:#fff;border-radius:0 0 var(--r) var(--r);border:1px solid var(--ds-border);border-top:none;">
+          <thead><tr><th>Class</th><th>Colour</th><th>Ticket Status</th></tr></thead>
+          <tbody>
+            <tr><td class="token-name">.tag-y</td><td>Yellow</td><td>Pending Review — submitted, not yet actioned by PIC</td></tr>
+            <tr><td class="token-name">.tag-b</td><td>Blue</td><td>In Progress — PIC actively working on it</td></tr>
+            <tr><td class="token-name">.tag-o</td><td>Orange</td><td>Pending Employee — reverted, awaiting employee response</td></tr>
+            <tr><td class="token-name">.tag-g</td><td>Green</td><td>Resolved — PIC has provided resolution</td></tr>
+            <tr><td class="token-name">.tag-gr</td><td>Grey</td><td>Closed — employee accepted or auto-closed after 2 days</td></tr>
+            <tr><td class="token-name">.tag-r</td><td>Red</td><td>Overdue — exceeded SLA deadline</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="ds-sub">
+        <div class="ds-sub-title">SLA Pills</div>
+        <div class="ds-canvas" style="display:flex;flex-wrap:wrap;gap:10px;align-items:center;">
+          <span class="sla-pill sla-ok"><span class="sla-dot"></span>On Track · 14h left</span>
+          <span class="sla-pill sla-warn"><span class="sla-dot"></span>Due in 3h</span>
+          <span class="sla-pill sla-over"><span class="sla-dot"></span>Overdue · 26h</span>
+          <span class="sla-pill sla-res"><span class="sla-dot"></span>Resolved</span>
+        </div>
+        <table class="token-table" style="background:#fff;border-radius:0 0 var(--r) var(--r);border:1px solid var(--ds-border);border-top:none;">
+          <thead><tr><th>Class</th><th>Meaning</th><th>When to show</th></tr></thead>
+          <tbody>
+            <tr><td class="token-name">.sla-ok</td><td>Green — On Track</td><td>More than 8h remaining to SLA deadline</td></tr>
+            <tr><td class="token-name">.sla-warn</td><td>Yellow — Due Soon</td><td>Less than 8h remaining — requires attention</td></tr>
+            <tr><td class="token-name">.sla-over</td><td>Red — Overdue</td><td>SLA deadline has passed — urgent action needed</td></tr>
+            <tr><td class="token-name">.sla-res</td><td>Grey — Resolved/Closed</td><td>Ticket no longer active</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="ds-sub">
+        <div class="ds-sub-title">Info Pill (Identity Card)</div>
+        <div class="ds-canvas" style="display:flex;flex-wrap:wrap;gap:8px;">
+          <div class="ic-pill icp-live"><span class="pulse-dot"></span> Live</div>
+          <div class="ic-pill icp-warn">⚠️ 9 Overdue</div>
+          <div class="ic-pill icp-scope">📁 Payroll</div>
+          <div class="ic-pill icp-scope">📁 Employee Benefits</div>
+        </div>
+      </div>
+
+      <div class="ds-sub">
+        <div class="ds-sub-title">Status Toggle (PIC Active/Inactive)</div>
+        <div class="ds-canvas" style="display:flex;gap:10px;">
+          <button class="status-toggle st-active">● Active</button>
+          <button class="status-toggle st-inactive">○ Inactive</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════
+         FORM INPUTS
+    ══════════════════════════════ -->
+    <div class="ds-section" id="inputs">
+      <div class="ds-section-header">
+        <div class="ds-section-eyebrow">Components</div>
+        <div class="ds-section-title">Form Inputs</div>
+        <div class="ds-section-desc">All inputs share the same base class <code style="background:var(--soft);padding:2px 6px;border-radius:4px;font-size:12px;">.fi</code> for consistent sizing and focus states.</div>
+      </div>
+
+      <div class="g2">
+        <div>
+          <div class="ds-sub-title" style="margin-bottom:14px;">Text Input</div>
+          <div class="fi-group"><label class="fi-label">Full Name <span style="color:var(--red);">*</span></label><input class="fi" type="text" placeholder="e.g. Ahmad Zulkifli"></div>
+          <div class="fi-group"><label class="fi-label">Staff ID</label><input class="fi" type="text" value="TM-04291"><div class="fi-hint">Format: TM-XXXXX</div></div>
+          <div class="fi-group"><label class="fi-label">Error State</label><input class="fi error" type="text" value="invalid@"><div class="fi-error">⚠️ Please enter a valid email address</div></div>
+        </div>
+        <div>
+          <div class="ds-sub-title" style="margin-bottom:14px;">Select & Textarea</div>
+          <div class="fi-group"><label class="fi-label">Category <span style="color:var(--red);">*</span></label>
+            <select class="fi fi-sel"><option>Payroll</option><option>Leave Management</option><option>Document Verification</option></select>
+          </div>
+          <div class="fi-group"><label class="fi-label">Description <span style="color:var(--red);">*</span></label>
+            <textarea class="fi" rows="3" placeholder="Describe your issue…"></textarea>
+            <div class="fi-hint">Minimum 10 characters required</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ds-sub" style="margin-top:20px;">
+        <div class="ds-sub-title">Checkbox List (Multi-select)</div>
+        <div style="display:flex;flex-direction:column;gap:5px;max-width:360px;">
+          <label class="cb-item checked"><input type="checkbox" checked style="accent-color:var(--blue);width:14px;height:14px;"> Payroll</label>
+          <label class="cb-item checked"><input type="checkbox" checked style="accent-color:var(--blue);width:14px;height:14px;"> Employee Benefits</label>
+          <label class="cb-item"><input type="checkbox" style="accent-color:var(--blue);width:14px;height:14px;"> Leave Management</label>
+          <label class="cb-item"><input type="checkbox" style="accent-color:var(--blue);width:14px;height:14px;"> HR Related Systems</label>
+        </div>
+      </div>
+
+      <div class="ds-sub">
+        <div class="ds-sub-title">Inline Filter Select (toolbar use)</div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;padding:12px 16px;background:#fff;border-radius:var(--r2);border:1px solid var(--light);">
+          <select class="filter-sel-sm"><option>Status: All</option><option>Pending Review</option><option>In Progress</option></select>
+          <select class="filter-sel-sm"><option>Category: All</option><option>Payroll</option><option>Leave Management</option></select>
+          <select class="filter-sel-sm"><option>SLA: All</option><option>Overdue</option><option>Due Soon</option></select>
+        </div>
+        <div style="font-size:12px;color:var(--gray);margin-top:8px;">Use <code style="background:var(--soft);padding:1px 5px;border-radius:4px;">.filter-sel-sm</code> for compact selects in toolbars. Use <code style="background:var(--soft);padding:1px 5px;border-radius:4px;">.fi .fi-sel</code> for full-width form selects inside modals.</div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════
+         CARDS
+    ══════════════════════════════ -->
+    <div class="ds-section" id="cards">
+      <div class="ds-section-header">
+        <div class="ds-section-eyebrow">Components</div>
+        <div class="ds-section-title">Cards</div>
+        <div class="ds-section-desc">Three card types are used across the portal. All share the same border, shadow, and radius tokens.</div>
+      </div>
+
+      <div class="ds-sub">
+        <div class="ds-sub-title">Standard Card (with header)</div>
+        <div style="max-width:360px;">
+          <div class="card">
+            <div class="card-hd"><span class="chi">📊</span><h2>SLA Performance</h2><span class="tag tag-g" style="font-size:10px;">Target: 95%</span></div>
+            <div class="card-body" style="font-size:13px;color:var(--gray);">Chart or content goes here. The card header uses a 1px bottom border from <code style="background:var(--soft);padding:1px 5px;border-radius:4px;">--light</code>.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ds-sub">
+        <div class="ds-sub-title">KPI Stat Cards</div>
+        <div class="g4">
+          <div class="kpi-card kc-blue">
+            <div class="kpi-top"><div class="kpi-icon ki-b">🎫</div><span class="tag tag-b" style="font-size:10px;">+12</span></div>
+            <div class="kpi-val">8,128</div>
+            <div class="kpi-lbl">Total Tickets</div>
+            <div class="kpi-trend trend-up">↑ 8.2%</div>
+          </div>
+          <div class="kpi-card kc-green">
+            <div class="kpi-top"><div class="kpi-icon ki-g">✅</div><span class="tag tag-g" style="font-size:10px;">98.8%</span></div>
+            <div class="kpi-val">8,033</div>
+            <div class="kpi-lbl">Total Closed</div>
+            <div class="kpi-trend trend-up">↑ 234</div>
+          </div>
+          <div class="kpi-card kc-red">
+            <div class="kpi-top"><div class="kpi-icon ki-r">⚠️</div><span class="tag tag-r" style="font-size:10px;">Urgent</span></div>
+            <div class="kpi-val">95</div>
+            <div class="kpi-lbl">Overdue</div>
+            <div class="kpi-trend trend-dn">↑ 8</div>
+          </div>
+          <div class="kpi-card kc-orange">
+            <div class="kpi-top"><div class="kpi-icon ki-o">🏆</div><span class="tag tag-o" style="font-size:10px;">Target 95%</span></div>
+            <div class="kpi-val">96.64%</div>
+            <div class="kpi-lbl">SLA Achievement</div>
+            <div class="kpi-trend trend-up">↑ Above</div>
+          </div>
+        </div>
+        <div style="font-size:12px;color:var(--gray);margin-top:10px;">Colour accent bar applied via <code style="background:var(--soft);padding:1px 5px;border-radius:4px;">::after</code> pseudo-element. Classes: <code style="background:var(--soft);padding:1px 5px;border-radius:4px;">.kc-blue</code> <code style="background:var(--soft);padding:1px 5px;border-radius:4px;">.kc-green</code> <code style="background:var(--soft);padding:1px 5px;border-radius:4px;">.kc-red</code> <code style="background:var(--soft);padding:1px 5px;border-radius:4px;">.kc-orange</code></div>
+      </div>
+
+      <div class="ds-sub">
+        <div class="ds-sub-title">Identity Card (Info Card)</div>
+        <div class="info-card">
+          <div class="ic-av">RH</div>
+          <div><div class="ic-name">Rohani Hamzah</div><div class="ic-role">HR Admin · AskHR Ticketing</div></div>
+          <div class="ic-sep"></div>
+          <div style="display:flex;align-items:center;gap:6px;">
+            <div class="ic-pill icp-live"><span class="pulse-dot"></span> Live</div>
+            <div class="ic-pill icp-warn">⚠️ 9 Overdue</div>
+            <div class="ic-pill icp-scope">📁 Payroll</div>
+          </div>
+          <div style="margin-left:auto;font-size:11px;color:var(--gray2);">Updated: 19 Mar 2026</div>
+        </div>
+        <div style="font-size:12px;color:var(--gray);margin-top:10px;">Used at the top of every role-specific page. Replaces the hero banner. Shows: avatar, name, role, scope pills, and timestamp.</div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════
+         NAVIGATION
+    ══════════════════════════════ -->
+    <div class="ds-section" id="navigation">
+      <div class="ds-section-header">
+        <div class="ds-section-eyebrow">Components</div>
+        <div class="ds-section-title">Navigation</div>
+      </div>
+
+      <div class="ds-sub">
+        <div class="ds-sub-title">Top Navigation Bar</div>
+        <div class="topnav-demo">
+          <div class="tn-logo-demo">
+            <div class="tn-logo-box">TM</div>
+            <div class="tn-logo-txt"><span>HR Portal</span><span>Telekom Malaysia</span></div>
+          </div>
+          <div class="tn-links-demo">
+            <div class="tn-link-demo">🏠 Home</div>
+            <div class="tn-link-demo on">👤 Employee Central</div>
+            <div class="tn-link-demo">📊 Performance</div>
+            <div class="tn-link-demo">📚 Learning</div>
+          </div>
+          <div style="margin-left:auto;display:flex;align-items:center;gap:7px;">
+            <div class="tn-icon-demo">🔔<span class="ib">7</span></div>
+            <div class="tn-icon-demo">⚙️</div>
+            <div class="tn-av-demo">RH</div>
+          </div>
+        </div>
+        <div style="font-size:12px;color:var(--gray);margin-top:10px;">Height: 54px. Background: <code style="background:var(--soft);padding:1px 5px;border-radius:4px;">--navy</code>. Position: <code style="background:var(--soft);padding:1px 5px;border-radius:4px;">sticky top:0</code>. Active link uses white semi-transparent background.</div>
+      </div>
+
+      <div class="ds-sub">
+        <div class="ds-sub-title">Sub Navigation (Module Tabs)</div>
+        <div class="subnav-demo">
+          <div class="sn-demo on">📊 Dashboard</div>
+          <div class="sn-demo">🎫 My Tickets <span class="sn-badge-demo">7</span></div>
+          <div class="sn-demo">📋 All Tickets <span class="sn-badge-demo">94</span></div>
+          <div class="sn-demo">👥 PIC Management</div>
+          <div class="sn-demo">🗂️ Category Setup</div>
+          <div class="sn-demo">👤 My Requests</div>
+        </div>
+        <div style="font-size:12px;color:var(--gray);margin-top:10px;">Height: 44px. Position: <code style="background:var(--soft);padding:1px 5px;border-radius:4px;">sticky top:54px</code>. Active state uses 3px blue bottom border + blue text. Badges use orange background.</div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════
+         TABLES
+    ══════════════════════════════ -->
+    <div class="ds-section" id="tables">
+      <div class="ds-section-header">
+        <div class="ds-section-eyebrow">Components</div>
+        <div class="ds-section-title">Tables</div>
+        <div class="ds-section-desc">Tables are the primary data display component. Always wrap in a <code style="background:var(--soft);padding:2px 6px;border-radius:4px;font-size:12px;">.tbl-card</code> with a toolbar and footer.</div>
+      </div>
+
+      <div class="ds-sub">
+        <div class="ds-sub-title">Full Table Pattern</div>
+        <div style="background:#fff;border-radius:var(--r);border:1px solid var(--light);overflow:hidden;">
+          <!-- Toolbar -->
+          <div style="padding:11px 16px;display:flex;align-items:center;gap:8px;border-bottom:1px solid var(--light);flex-wrap:wrap;">
+            <div style="display:flex;align-items:center;gap:7px;background:var(--soft);border:1.5px solid var(--light);border-radius:9px;padding:6px 12px;min-width:200px;">
+              <span style="color:var(--gray2);">🔍</span>
+              <input style="background:none;border:none;outline:none;font-size:12.5px;color:var(--navy);width:100%;font-family:'DM Sans',sans-serif;" placeholder="Search tickets…">
+            </div>
+            <select class="filter-sel-sm"><option>Status: All</option></select>
+            <select class="filter-sel-sm"><option>SLA: All</option></select>
+            <div style="margin-left:auto;display:flex;gap:7px;align-items:center;">
+              <span style="font-size:12px;color:var(--gray);">10 of 94 tickets</span>
+              <button class="btn btn-d btn-sm">⬇️ Export</button>
+            </div>
+          </div>
+          <!-- Table -->
+          <table class="ds-table">
+            <thead><tr>
+              <th>Ticket ID</th><th>Employee</th><th>Category</th><th>Status</th><th>SLA</th><th>Submitted</th><th>Actions</th>
+            </tr></thead>
+            <tbody>
+              <tr>
+                <td><span style="font-family:'JetBrains Mono',monospace;font-size:11.5px;font-weight:700;color:var(--blue);">ASKHR-14892</span></td>
+                <td><div class="emp-cell"><div class="emp-av-sm">NI</div><div><div style="font-size:12.5px;font-weight:600;color:var(--navy);">Nur Izzati Mohd Fauzi</div><div style="font-size:10.5px;color:var(--gray2);">TM-07841</div></div></div></td>
+                <td><div style="font-size:12px;color:var(--navy);font-weight:500;">Payroll</div><div style="font-size:11px;color:var(--gray);">Payslip</div></td>
+                <td><span class="tag tag-b">In Progress</span></td>
+                <td><span class="sla-pill sla-over"><span class="sla-dot"></span>Overdue · 26h</span></td>
+                <td style="color:var(--gray);font-size:12px;">18 Mar 2026</td>
+                <td><div style="display:flex;gap:5px;"><button style="padding:4px 9px;border-radius:6px;font-size:11px;font-weight:600;border:1.5px solid rgba(232,98,42,.3);background:#fff;color:var(--orange);cursor:pointer;">↩️ Revert</button><button style="padding:4px 9px;border-radius:6px;font-size:11px;font-weight:600;border:1.5px solid var(--light);background:#fff;color:var(--gray);cursor:pointer;">👁 View</button></div></td>
+              </tr>
+              <tr>
+                <td><span style="font-family:'JetBrains Mono',monospace;font-size:11.5px;font-weight:700;color:var(--blue);">ASKHR-14910</span></td>
+                <td><div class="emp-cell"><div class="emp-av-sm">FL</div><div><div style="font-size:12.5px;font-weight:600;color:var(--navy);">Farah Liyana Othman</div><div style="font-size:10.5px;color:var(--gray2);">TM-09321</div></div></div></td>
+                <td><div style="font-size:12px;color:var(--navy);font-weight:500;">Payroll</div><div style="font-size:11px;color:var(--gray);">Tax Document</div></td>
+                <td><span class="tag tag-y">Pending Review</span></td>
+                <td><span class="sla-pill sla-ok"><span class="sla-dot"></span>On Track</span></td>
+                <td style="color:var(--gray);font-size:12px;">17 Mar 2026</td>
+                <td><div style="display:flex;gap:5px;"><button style="padding:4px 9px;border-radius:6px;font-size:11px;font-weight:600;border:1.5px solid var(--light);background:#fff;color:var(--gray);cursor:pointer;">✅ Resolve</button><button style="padding:4px 9px;border-radius:6px;font-size:11px;font-weight:600;border:1.5px solid var(--light);background:#fff;color:var(--gray);cursor:pointer;">👁 View</button></div></td>
+              </tr>
+            </tbody>
+          </table>
+          <!-- Footer -->
+          <div style="padding:10px 16px;border-top:1px solid var(--light);display:flex;align-items:center;justify-content:space-between;">
+            <span style="font-size:12px;color:var(--gray);">Showing 1–2 of 94 tickets</span>
+            <div class="pager">
+              <button class="pg-btn" disabled>‹</button>
+              <button class="pg-btn on">1</button>
+              <button class="pg-btn">2</button>
+              <button class="pg-btn">3</button>
+              <span style="color:var(--gray2);font-size:12px;align-self:center;">…</span>
+              <button class="pg-btn">10</button>
+              <button class="pg-btn">›</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ds-sub">
+        <div class="ds-sub-title">Table Anatomy</div>
+        <table class="token-table" style="background:#fff;border-radius:var(--r);border:1px solid var(--ds-border);">
+          <thead><tr><th>Element</th><th>Spec</th></tr></thead>
+          <tbody>
+            <tr><td style="font-weight:600;color:var(--navy);">Toolbar</td><td style="font-size:12.5px;color:var(--gray);">Search box + filter selects on left. Count label + Export button on right. 11px 16px padding.</td></tr>
+            <tr><td style="font-weight:600;color:var(--navy);">Header row</td><td style="font-size:12.5px;color:var(--gray);">10.5px uppercase, letter-spacing .07em, background #f8f9fb, sticky top:0, z-index:5</td></tr>
+            <tr><td style="font-weight:600;color:var(--navy);">Body row</td><td style="font-size:12.5px;color:var(--gray);">12.5px body text. Hover: background var(--soft). Row actions: opacity:0, reveal on hover.</td></tr>
+            <tr><td style="font-weight:600;color:var(--navy);">Employee cell</td><td style="font-size:12.5px;color:var(--gray);">28×28px avatar + name (12.5px bold) + staff ID (10.5px gray2)</td></tr>
+            <tr><td style="font-weight:600;color:var(--navy);">Ticket ID cell</td><td style="font-size:12.5px;color:var(--gray);">JetBrains Mono 700, 11.5px, blue colour — always monospace for scanability</td></tr>
+            <tr><td style="font-weight:600;color:var(--navy);">Row actions</td><td style="font-size:12.5px;color:var(--gray);">Small buttons (btn-xs equivalent), opacity:0 default, 1 on row hover. Max 3 actions.</td></tr>
+            <tr><td style="font-weight:600;color:var(--navy);">Pagination</td><td style="font-size:12.5px;color:var(--gray);">30×30px buttons, border-radius 6px. Active page: blue background, white text.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════
+         MODALS
+    ══════════════════════════════ -->
+    <div class="ds-section" id="modals">
+      <div class="ds-section-header">
+        <div class="ds-section-eyebrow">Components</div>
+        <div class="ds-section-title">Modals</div>
+        <div class="ds-section-desc">Modals are used for all focused task interactions — ticket detail, resolve, revert, reassign, create ticket. Always include: icon header, descriptive subtitle, body content, and a footer with Cancel + primary action.</div>
+      </div>
+
+      <div class="ds-sub">
+        <div class="ds-sub-title">Standard Modal</div>
+        <div style="display:flex;gap:20px;flex-wrap:wrap;align-items:flex-start;">
+          <div class="modal-demo">
+            <div class="modal-hd-demo">
+              <div class="modal-icon-demo mi-green">✅</div>
+              <div class="modal-hd-info">
+                <h3>Resolve Ticket</h3>
+                <p>Add resolution notes to close this ticket. Employee will be notified.</p>
+              </div>
+              <div class="modal-close-demo">✕</div>
+            </div>
+            <div class="modal-body-demo">
+              <div class="fi-group"><label class="fi-label">Resolution Notes <span style="color:var(--red);">*</span></label><textarea class="fi" rows="2" placeholder="Describe how the issue was resolved…"></textarea></div>
+            </div>
+            <div class="modal-ft-demo">
+              <button class="btn btn-d btn-sm">Cancel</button>
+              <button class="btn btn-p btn-sm">✅ Confirm Resolve</button>
+            </div>
+          </div>
+          <div class="modal-demo sm">
+            <div class="modal-hd-demo">
+              <div class="modal-icon-demo mi-orange">🔄</div>
+              <div class="modal-hd-info">
+                <h3>Revert Ticket</h3>
+                <p>Employee will be notified to provide additional information.</p>
+              </div>
+              <div class="modal-close-demo">✕</div>
+            </div>
+            <div class="modal-body-demo">
+              <div class="fi-group"><label class="fi-label">Remark <span style="color:var(--red);">*</span></label><textarea class="fi" rows="2" placeholder="What do you need from the employee?"></textarea></div>
+            </div>
+            <div class="modal-ft-demo">
+              <button class="btn btn-d btn-sm">Cancel</button>
+              <button class="btn btn-p btn-sm">↩️ Revert</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ds-sub">
+        <div class="ds-sub-title">Modal Icon Colours</div>
+        <div style="display:flex;gap:12px;flex-wrap:wrap;">
+          <div style="display:flex;flex-direction:column;align-items:center;gap:6px;"><div class="modal-icon-demo mi-blue" style="width:44px;height:44px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:22px;">🎫</div><div style="font-size:11px;color:var(--gray);">mi-blue</div><div style="font-size:11px;color:var(--gray2);">View / Info</div></div>
+          <div style="display:flex;flex-direction:column;align-items:center;gap:6px;"><div class="modal-icon-demo mi-orange" style="width:44px;height:44px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:22px;">🔄</div><div style="font-size:11px;color:var(--gray);">mi-orange</div><div style="font-size:11px;color:var(--gray2);">Reassign / Revert</div></div>
+          <div style="display:flex;flex-direction:column;align-items:center;gap:6px;"><div class="modal-icon-demo mi-green" style="width:44px;height:44px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:22px;">✅</div><div style="font-size:11px;color:var(--gray);">mi-green</div><div style="font-size:11px;color:var(--gray2);">Resolve / Add</div></div>
+          <div style="display:flex;flex-direction:column;align-items:center;gap:6px;"><div class="modal-icon-demo mi-red" style="width:44px;height:44px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:22px;">⚠️</div><div style="font-size:11px;color:var(--gray);">mi-red</div><div style="font-size:11px;color:var(--gray2);">Warning / Error</div></div>
+        </div>
+      </div>
+
+      <div class="ds-sub">
+        <div class="ds-sub-title">Modal Sizes</div>
+        <table class="token-table" style="background:#fff;border-radius:var(--r);border:1px solid var(--ds-border);">
+          <thead><tr><th>Class</th><th>Max Width</th><th>Use case</th></tr></thead>
+          <tbody>
+            <tr><td class="token-name">.modal.sm</td><td>480px</td><td>Simple action modals: Resolve, Revert, Add Category, Rating</td></tr>
+            <tr><td class="token-name">.modal</td><td>820px</td><td>Ticket detail (with thread + form), Reassign with flow preview</td></tr>
+            <tr><td class="token-name">inline style max-width</td><td>760px</td><td>Bulk reassign with ticket table</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="ds-sub">
+        <div class="ds-sub-title">Backdrop & Animation</div>
+        <div style="background:var(--soft);border-radius:var(--r2);padding:14px 16px;font-size:13px;line-height:1.7;color:var(--text);">
+          Backdrop: <code style="background:#fff;padding:1px 5px;border-radius:4px;">rgba(13,27,75,.45)</code> + <code style="background:#fff;padding:1px 5px;border-radius:4px;">backdrop-filter:blur(4px)</code><br>
+          Animation: <code style="background:#fff;padding:1px 5px;border-radius:4px;">scale(.97) translateY(10px)</code> → <code style="background:#fff;padding:1px 5px;border-radius:4px;">scale(1) translateY(0)</code>, 220ms ease<br>
+          Close: clicking ✕ button, or Cancel button. Never close on backdrop click (prevents accidental data loss).
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════
+         FEEDBACK
+    ══════════════════════════════ -->
+    <div class="ds-section" id="feedback">
+      <div class="ds-section-header">
+        <div class="ds-section-eyebrow">Components</div>
+        <div class="ds-section-title">Feedback: Toast & Tooltips</div>
+      </div>
+
+      <div class="ds-sub">
+        <div class="ds-sub-title">Toast Notifications</div>
+        <div class="ds-canvas" style="display:flex;flex-wrap:wrap;gap:10px;">
+          <div class="toast-demo">✅ <span>Ticket resolved. Employee notified.</span></div>
+          <div class="toast-demo">🔄 <span>3 tickets reassigned to Ahmad Zulkifli.</span></div>
+          <div class="toast-demo">⚠️ <span>Please enter resolution notes.</span></div>
+          <div class="toast-demo">📤 <span>Response submitted. HR has been notified.</span></div>
+        </div>
+        <div style="font-size:12px;color:var(--gray);margin-top:10px;">Position: <code style="background:var(--soft);padding:1px 5px;border-radius:4px;">fixed bottom:22px right:22px</code>. Z-index: 1200. Auto-dismiss after 3.2 seconds. Background: <code style="background:var(--soft);padding:1px 5px;border-radius:4px;">--navy</code>.</div>
+      </div>
+
+      <div class="ds-sub">
+        <div class="ds-sub-title">Tooltips</div>
+        <div class="ds-canvas" style="display:flex;gap:16px;flex-wrap:wrap;padding-top:32px;">
+          <span class="tooltip-demo btn btn-s btn-sm" data-tip="Click to export filtered tickets as CSV">⬇️ Export</span>
+          <span class="tooltip-demo tag tag-r" data-tip="This ticket has exceeded its SLA deadline">Overdue · 26h</span>
+          <span class="tooltip-demo" data-tip="SLA achievement rate — target is 95%" style="font-family:'Sora',sans-serif;font-size:20px;font-weight:800;color:var(--navy);">96.64%</span>
+        </div>
+        <div style="font-size:12px;color:var(--gray);margin-top:10px;">Implemented via CSS-only <code style="background:var(--soft);padding:1px 5px;border-radius:4px;">[data-tip]</code> attribute selector. No JavaScript required. Appears on hover above the element. Background: navy, border-radius: 7px.</div>
+      </div>
+    </div>
+
+    <div class="ds-divider"></div>
+
+    <!-- ══════════════════════════════
+         TICKET PATTERNS
+    ══════════════════════════════ -->
+    <div class="ds-section" id="ticket-patterns">
+      <div class="ds-section-header">
+        <div class="ds-section-eyebrow">Patterns</div>
+        <div class="ds-section-title">Ticket Patterns</div>
+        <div class="ds-section-desc">The core interaction patterns for the AskHR ticketing flow.</div>
+      </div>
+
+      <div class="ds-sub">
+        <div class="ds-sub-title">Remarks Audit Trail</div>
+        <div class="ds-sub-desc">The audit trail is a read-only chronological log of all ticket events. No compose box — remarks are only added through Resolve or Revert modals (PIC) or the resubmit flow (Employee).</div>
+        <div style="background:#fff;border-radius:var(--r);border:1px solid var(--light);padding:14px 16px;">
+          <div class="remark-item">
+            <div class="remark-dot rd-sys">🤖</div>
+            <div class="remark-content">
+              <div class="remark-type-badge rtb-system">System</div>
+              <div class="remark-actor">AskHR System</div>
+              <div class="remark-text">Ticket ASKHR-14892 created. Category: Payroll → Payslip. Acknowledgement email sent. Status: Submitted – Pending HR Review.</div>
+              <div class="remark-time">18 Mar 2026, 7:12 AM</div>
+            </div>
+          </div>
+          <div class="remark-item">
+            <div class="remark-dot rd-emp">👤</div>
+            <div class="remark-content">
+              <div class="remark-type-badge rtb-emp">Employee</div>
+              <div class="remark-actor">Nur Izzati (Employee)</div>
+              <div class="remark-text"><strong>Subject:</strong> Payslip not showing deduction breakdown<br><br>My March 2026 payslip is not showing EPF, SOCSO, PCB lines — all are blank despite the net salary being correct.</div>
+              <div class="remark-time">18 Mar 2026, 7:12 AM</div>
+            </div>
+          </div>
+          <div class="remark-item">
+            <div class="remark-dot rd-revert">↩️</div>
+            <div class="remark-content">
+              <div class="remark-type-badge rtb-revert">Reverted</div>
+              <div class="remark-actor">Siti Hajar Ramli (PIC)</div>
+              <div class="remark-text">Please provide a screenshot of the payslip page and confirm your browser and OS version.</div>
+              <div class="remark-time">18 Mar 2026, 9:45 AM</div>
+            </div>
+          </div>
+          <div class="remark-item">
+            <div class="remark-dot rd-resolve">✅</div>
+            <div class="remark-content">
+              <div class="remark-type-badge rtb-resolve">Resolved</div>
+              <div class="remark-actor">Siti Hajar Ramli (PIC)</div>
+              <div class="remark-text">Resolved: Confirmed the deduction data is present in the system. Issue was a browser caching problem on Chrome 121. Employee cleared cache and payslip now displays correctly.</div>
+              <div class="remark-time">19 Mar 2026, 2:10 PM</div>
+            </div>
+          </div>
+        </div>
+        <table class="token-table" style="background:#fff;border-radius:var(--r);border:1px solid var(--ds-border);margin-top:12px;">
+          <thead><tr><th>Type</th><th>Dot Class</th><th>Badge Class</th><th>Triggered by</th></tr></thead>
+          <tbody>
+            <tr><td>System</td><td class="token-name">.rd-sys</td><td class="token-name">.rtb-system</td><td>Automatic on ticket create, status change, SLA events</td></tr>
+            <tr><td>Employee</td><td class="token-name">.rd-emp</td><td class="token-name">.rtb-emp</td><td>Ticket creation form, resubmission after revert</td></tr>
+            <tr><td>PIC Remark</td><td class="token-name">.rd-pic</td><td class="token-name">.rtb-pic</td><td>General PIC notes (from resolve or view)</td></tr>
+            <tr><td>Reverted</td><td class="token-name">.rd-revert</td><td class="token-name">.rtb-revert</td><td>PIC clicks Revert — adds mandatory remark</td></tr>
+            <tr><td>Resolved</td><td class="token-name">.rd-resolve</td><td class="token-name">.rtb-resolve</td><td>PIC clicks Resolve — adds resolution notes</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="ds-sub">
+        <div class="ds-sub-title">Attachment Card</div>
+        <div style="display:flex;flex-direction:column;gap:6px;max-width:360px;padding:16px;background:#fff;border-radius:var(--r);border:1px solid var(--light);">
+          <div class="att-card"><div class="att-icon">📄</div><div class="att-info"><div class="att-name">medical_receipt_march2026.pdf</div><div class="att-size">284 KB · PDF</div></div><span style="font-size:14px;color:var(--blue);cursor:pointer;" data-tip="Download">⬇</span></div>
+          <div class="att-card"><div class="att-icon">🖼️</div><div class="att-info"><div class="att-name">payslip_screenshot.png</div><div class="att-size">102 KB · Image</div></div><button class="att-remove" data-tip="Remove attachment">✕</button></div>
+        </div>
+        <div style="font-size:12px;color:var(--gray);margin-top:8px;">Icon determined by file extension. Remove button (✕) only shown during upload (before submit). After submit, shows download (⬇) icon only.</div>
+      </div>
+
+      <div class="ds-sub">
+        <div class="ds-sub-title">Ticket Status Flow</div>
+        <div style="background:#fff;border-radius:var(--r);border:1px solid var(--light);padding:20px;">
+          <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
+            <span class="tag tag-b" style="font-size:11px;">Submitted</span>
+            <span style="color:var(--gray2);">→</span>
+            <span class="tag tag-y" style="font-size:11px;">Pending Review</span>
+            <span style="color:var(--gray2);">→</span>
+            <span class="tag tag-b" style="font-size:11px;">In Progress</span>
+            <span style="color:var(--gray2);">→</span>
+            <span class="tag tag-o" style="font-size:11px;">Pending Employee</span>
+            <span style="color:var(--gray2);">→</span>
+            <span class="tag tag-b" style="font-size:11px;">In Progress</span>
+            <span style="color:var(--gray2);">→</span>
+            <span class="tag tag-g" style="font-size:11px;">Resolved</span>
+            <span style="color:var(--gray2);">→</span>
+            <span class="tag tag-gr" style="font-size:11px;">Closed</span>
+          </div>
+          <div style="font-size:12px;color:var(--gray);margin-top:12px;line-height:1.7;">
+            <strong>Pending Employee</strong> → triggered by PIC Revert. Employee responds → back to <strong>In Progress</strong>.<br>
+            <strong>Resolved</strong> → triggered by PIC Resolve. Employee accepts → <strong>Closed</strong>. Employee dissatisfied → Re-open (<strong>In Progress</strong>).<br>
+            <strong>Auto-close</strong> → 2 days after Resolved with no employee response.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════
+         FILTER PATTERNS
+    ══════════════════════════════ -->
+    <div class="ds-section" id="filter-patterns">
+      <div class="ds-section-header">
+        <div class="ds-section-eyebrow">Patterns</div>
+        <div class="ds-section-title">Filter & Search</div>
+      </div>
+
+      <div class="ds-sub">
+        <div class="ds-sub-title">Toolbar Filter Bar (Table)</div>
+        <div style="background:#fff;border-radius:var(--r2);border:1px solid var(--light);padding:11px 16px;display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
+          <div style="display:flex;align-items:center;gap:7px;background:var(--soft);border:1.5px solid var(--light);border-radius:9px;padding:6px 12px;min-width:200px;">
+            <span style="color:var(--gray2);">🔍</span>
+            <input style="background:none;border:none;outline:none;font-size:12.5px;color:var(--navy);width:100%;font-family:'DM Sans',sans-serif;" placeholder="Search ID, employee, subject…">
+          </div>
+          <select class="filter-sel-sm"><option>Status: All</option><option>In Progress</option></select>
+          <select class="filter-sel-sm"><option>Category: All</option><option>Payroll</option></select>
+          <select class="filter-sel-sm"><option>PIC: All</option></select>
+          <select class="filter-sel-sm"><option>SLA: All</option><option>Overdue</option></select>
+          <div style="margin-left:auto;display:flex;gap:7px;align-items:center;">
+            <span style="font-size:12px;color:var(--gray);">10 of 94</span>
+            <button class="btn btn-d btn-sm">✕ Clear</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="ds-sub">
+        <div class="ds-sub-title">Dashboard Filter Bar (with Month Picker)</div>
+        <div class="filter-bar">
+          <span class="filter-lbl">Month</span>
+          <select class="filter-sel-sm"><option>All Months (2025)</option><option>March 2025</option></select>
+          <div style="margin-left:auto;display:flex;gap:8px;">
+            <select class="filter-sel-sm"><option>Division: All</option><option>HCSSO</option><option>HCI</option></select>
+            <select class="filter-sel-sm"><option>Team: All</option><option>PBS PY</option></select>
+            <button class="btn btn-d btn-sm">⬇️ Export</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════
+         DATA DISPLAY
+    ══════════════════════════════ -->
+    <div class="ds-section" id="data-display">
+      <div class="ds-section-header">
+        <div class="ds-section-eyebrow">Patterns</div>
+        <div class="ds-section-title">Data Display</div>
+      </div>
+
+      <div class="ds-sub">
+        <div class="ds-sub-title">LOB Horizontal Bar</div>
+        <div style="background:#fff;border-radius:var(--r);border:1px solid var(--light);padding:4px 16px;">
+          <div class="lob-item"><div class="lob-name">UNIFI</div><div class="lob-bar-wrap"><div class="lob-bar" style="width:100%"></div></div><div class="lob-val">646</div></div>
+          <div class="lob-item"><div class="lob-name">TM ONE</div><div class="lob-bar-wrap"><div class="lob-bar" style="width:68%"></div></div><div class="lob-val">442</div></div>
+          <div class="lob-item"><div class="lob-name">TM GLOBAL</div><div class="lob-bar-wrap"><div class="lob-bar" style="width:27%"></div></div><div class="lob-val">173</div></div>
+          <div class="lob-item"><div class="lob-name">TMRND</div><div class="lob-bar-wrap"><div class="lob-bar" style="width:3%"></div></div><div class="lob-val">15</div></div>
+        </div>
+      </div>
+
+      <div class="ds-sub">
+        <div class="ds-sub-title">AI Suggestion Panel (Create Ticket)</div>
+        <div style="background:linear-gradient(135deg,var(--soft),rgba(240,244,255,.5));border:1px solid rgba(26,58,181,.2);border-radius:10px;padding:13px 14px;max-width:460px;">
+          <div style="display:flex;align-items:center;gap:7px;margin-bottom:10px;"><span style="font-size:15px;">✨</span><span style="font-size:12.5px;font-weight:700;color:var(--blue);">AI Suggestion</span><span style="font-size:11px;color:var(--gray);">Click one to use as subject</span></div>
+          <div class="ai-sug-demo selected">Payslip not displaying correctly</div>
+          <div class="ai-sug-demo">Incorrect salary deduction</div>
+          <div class="ai-sug-demo">EPF/SOCSO contribution error</div>
+        </div>
+        <div style="font-size:12px;color:var(--gray);margin-top:8px;">Triggered when description ≥20 characters AND category selected. 900ms simulated AI delay. Click to auto-fill subject field.</div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════
+         EMPTY STATES
+    ══════════════════════════════ -->
+    <div class="ds-section" id="empty-states">
+      <div class="ds-section-header">
+        <div class="ds-section-eyebrow">Patterns</div>
+        <div class="ds-section-title">Empty States</div>
+        <div class="ds-section-desc">Empty states appear when a table has no results or a section has no data. Always include an icon, a clear message, and (where appropriate) a CTA to create something.</div>
+      </div>
+      <div class="g2">
+        <div style="background:#fff;border-radius:var(--r);border:1px solid var(--light);padding:48px 24px;display:flex;flex-direction:column;align-items:center;gap:10px;text-align:center;">
+          <div style="font-size:44px;opacity:.35;">🎫</div>
+          <div style="font-size:14px;font-weight:700;color:var(--navy);">No tickets found</div>
+          <div style="font-size:13px;color:var(--gray2);">Try adjusting your filters or search term</div>
+          <button class="btn btn-s btn-sm" style="margin-top:4px;">✕ Clear Filters</button>
+        </div>
+        <div style="background:#fff;border-radius:var(--r);border:1px solid var(--light);padding:48px 24px;display:flex;flex-direction:column;align-items:center;gap:10px;text-align:center;">
+          <div style="font-size:44px;opacity:.35;">📭</div>
+          <div style="font-size:14px;font-weight:700;color:var(--navy);">No requests yet</div>
+          <div style="font-size:13px;color:var(--gray2);">Submit your first ticket to get HR support</div>
+          <button class="btn btn-p btn-sm" style="margin-top:4px;">✚ Create Ticket</button>
+        </div>
+      </div>
+      <div style="background:var(--soft);border-radius:var(--r2);padding:14px 16px;font-size:13px;line-height:1.7;margin-top:12px;color:var(--text);">
+        <strong>Empty state rules:</strong> Icon at 44–48px with 35% opacity. Title in navy bold 14px. Subtitle in gray2 13px. CTA button only if the user can take an action to populate the state. Use <code style="background:#fff;padding:1px 5px;border-radius:4px;">.btn-s</code> for "adjust" actions, <code style="background:#fff;padding:1px 5px;border-radius:4px;">.btn-p</code> for "create" actions.
+      </div>
+    </div>
+
+  </div><!-- /content -->
+</main>
+
+<script>
+// Active sidebar link tracking
+const sections=document.querySelectorAll('.ds-section');
+const navItems=document.querySelectorAll('.sn-item');
+
+const observer=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      const id=e.target.id;
+      navItems.forEach(n=>{
+        n.classList.toggle('active',n.getAttribute('href')==='#'+id);
+      });
+    }
+  });
+},{threshold:0.2,rootMargin:'-60px 0px -40% 0px'});
+
+sections.forEach(s=>observer.observe(s));
+
+// Copy button functionality
+document.querySelectorAll('.copy-btn').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    const code=btn.closest('.ds-code-wrap').querySelector('.ds-code').textContent;
+    navigator.clipboard.writeText(code).then(()=>{
+      btn.textContent='Copied!';
+      setTimeout(()=>btn.textContent='Copy',2000);
+    });
+  });
+});
+
+// Smooth scroll for nav
+navItems.forEach(item=>{
+  item.addEventListener('click',e=>{
+    e.preventDefault();
+    const target=document.querySelector(item.getAttribute('href'));
+    if(target) target.scrollIntoView({behavior:'smooth',block:'start'});
+  });
+});
+</script>
+</body>
+</html>
